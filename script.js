@@ -103,7 +103,10 @@ function receiveRandomInsult() {
     <button id="following-present">Siguiente regalo</p>
     `
     document.querySelector("#no-insult").onclick = (function () {
-        window.alert("Eres una persona horrible :(");
+        document.querySelector("#show-content").style.display = "none";
+        setTimeout( ( function () {
+            window.alert("Eres una persona horrible :(");
+        }), 100);
     })
     document.querySelector("#following-present").onclick = whatRMCharacterAreYou;
 
@@ -124,13 +127,18 @@ function receiveRandomInsult() {
                 return response.json();
             }).then( function(data) {
                 
+                
                 document.querySelector("#show-content").innerHTML =
                 `
                 <q>${data.message}</q>
                 <p>${data.subtitle}</p>
+                <br>
+                <small>Dale otra vez a Sí, si quieres.</small>
                 `
-                
 
+                document.querySelector("#show-content").style.display = "block";
+
+                
 
             })
         })
@@ -146,11 +154,16 @@ function whatRMCharacterAreYou() {
         <button id="yes-rm">Si</p>
         <button id="no-rm">No</p>
         <br>
-        <button id="ciao">Siguiente regalo</p>
+        <button id="following-present">Siguiente regalo</p>
         `
     document.querySelector("#no-rm").onclick = (function () {
-        window.alert("Eres una persona horrible :(");
+        document.querySelector("#show-content").style.display = "none";
+
+        setTimeout( ( function () {
+            window.alert("Eres una persona horrible :(");
+        }), 100);
     })
+
 
     document.querySelector("#yes-rm").onclick = (function () {
         fetch("https://rickandmortyapi.com/api/character/").then( function (response) {
@@ -162,15 +175,98 @@ function whatRMCharacterAreYou() {
                 return response.json();
             }).then( function (data) {
 
+
                 document.querySelector("#show-content").innerHTML =
                 `
                 <h2>${data.name}</h2>
                 <img src=${data.image} alt="Picture of ${data.name}" style="width:95%">
                 `
+
+                document.querySelector("#show-content").style.display = "block";
             })
         })
 
     })
+
+    document.querySelector("#following-present").onclick = showNASAPictureDay;
+    
+}
+
+function showNASAPictureDay() {
+    const introDiv = document.querySelector("#div-intro");
+
+    introDiv.innerHTML =
+        `
+        <p>Quieres saber cual fue la foto del dia de NASA el dia que naciste?</p>
+        <button id="yes-nasa">Si</p>
+        <button id="no-nasa">No</p>
+        <br>
+        <button id="following-present">Siguiente regalo?</p>
+        `
+
+    document.querySelector("#no-nasa").onclick = (function () {
+        document.querySelector("#show-content").style.display = "none";
+
+        setTimeout( ( function () {
+            window.alert("Eres una persona horrible :(");
+        }), 100);
+    })
+
+    document.querySelector("#yes-nasa").onclick = ( function () {
+        document.querySelector("#show-content").innerHTML =
+        `
+        <p>Selecciona tu fecha de nacimiento</p>
+        <input type="date" id="chosen-date" value="1995-07-01" min="1990-01-01" max="2002-12-12"></input>
+        
+        <div id="pic-of-day"></div>
+        `
+
+        document.querySelector("#show-content").style.display = "block";
+
+        let dateSelector = document.querySelector("#chosen-date");
+
+        
+        dateSelector.onchange = ( function () {
+
+            if ( dateSelector.value.substring(0,4) >= 1995 && dateSelector.value.substring(5,7) > 6 ) {
+    
+            const apiWithKey = "https://api.nasa.gov/planetary/apod?api_key=cFHrfctjIdRGLOzxcTPgPPUXBRJg46GpLPnUmrSF"
+        
+            
+        
+            fetch(`${apiWithKey}&date=${dateSelector.value}`).then( function (answer) {
+                return answer.json();
+            }).then( function(data) {
+        
+                document.querySelector("#pic-of-day").innerHTML =
+                        `
+                        <br>
+                        <p>${data.date.slice(-2)}/${data.date.slice(-5,-3)}/${data.date.slice(0,4)}</p>
+                        <h2>${data.title}</h2>
+                        <img src="${data.url}" alt="Picture of ${data.title}" style="max-width: 100%">
+                        `
+            })
+    
+            } else {
+                document.querySelector("#pic-of-day").innerHTML =
+                `
+                <br>
+                <h2>Eres tan viej@ que la NASA ni tiene fotos para el dia de tu nacimiento</h2>
+                <img src="./img/hide_the_pain.png" alt="Close up of old men" style="max-width: 100%">
+                `
+            }
+        })
+
+        document.querySelector("#following-present").onclick = endOfPresents;
+    })
+
+function endOfPresents() {
+    document.querySelector("#show-content").innerHTML =
+        `
+        <p>Ya vale! Aqui se acabaron tus regalos. Ahora vuelve a trabajar!</p>
+        `
+}
+    
 
 }
 
