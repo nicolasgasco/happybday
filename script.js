@@ -97,7 +97,7 @@ function receiveRandomInsult() {
 
     introDiv.innerHTML =
     `
-    <p>Quieres recibir un insulto?</p>
+    <p>Quieres recibir un insulto en ingles?</p>
     <button id="yes-insult">Si</p>
     <button id="no-insult">No</p>
     `
@@ -108,34 +108,37 @@ function receiveRandomInsult() {
         fetch("https://www.foaas.com/operations").then( function(response) {
             return response.json();
         }).then( function(data) {
-                for ( let singleInsult of data ) {
-                    if ( singleInsult.url.slice(-11) === ":name/:from" ) {
-                        let randomUser = userNames[Math.floor(Math.random() * userNames.length)]
+            let usersWithoutChosenUser = userNames.filter(user => user !== chosenUser)
 
-                        let urlRandomInsult = singleInsult.url.replace(":name", chosenUser).replace(":from", randomUser);
-                        console.log(urlRandomInsult)
+            data = data.filter(insult => insult.url.slice(-11) === ":name/:from");
+                    
+            let randomUser = usersWithoutChosenUser[Math.floor(Math.random() * usersWithoutChosenUser.length)]
+            let randomInsultToFetch = data[Math.floor(Math.random() * data.length)]
 
-                        fetch(`https://www.foaas.com/${urlRandomInsult}`).then( function(response) {
-                            return response.json();
-                        }).then( function(data) {
-                            console.log(data);
-                        })
+            let urlRandomInsult = randomInsultToFetch.url.replace(":name", capitalizeName(chosenUser)).replace(":from", capitalizeName(randomUser));
 
-
-                    }
-                }
+            fetch(`https://www.foaas.com${urlRandomInsult}`, { headers: {"Accept": "application/json"}}).then( function(response) {
+                return response.json();
+            }).then( function(data) {
+                
+                document.querySelector("#show-content").innerHTML =
+                `
+                <q>${data.message}</q>
+                <p>${data.subtitle}</p>
+                `
+            })
         })
-    
     })
-
-
-
 }
 
 function fetchRandomInsult() {
 
 }
 
+function capitalizeName(name) {
+    let result = name.charAt(0).toUpperCase() + name.substring(1);
+    return result;
+}
 
 
 function changeColorTheme() {
