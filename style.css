@@ -1,7 +1,6 @@
 * {
     box-sizing: border-box;
     font-size: 1.1rem;
-    outline:1px solid red;
 }
 
 
@@ -120,12 +119,12 @@ main {
 
 
 #select-user, input, #select-color option {
-    background-color: #ADAC9A;
+    background-color: #FAFAF0;
 }
 
 
 #div-intro, #show-content {
-    background-color:#484838;
+    background-color:#303030;
 }
 
 #main-header {
@@ -175,7 +174,7 @@ body, button {
 
 
 #happybd-h1, #color-theme-choice, footer {
-    color: #484838;
+    color: #303030;
 }
 
 footer {

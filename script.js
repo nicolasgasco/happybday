@@ -4,22 +4,22 @@ const userNames = ["deba", "allende", "adrian", "greta", "andrea", "haizea", "le
 const colors = {
     "rosa": {
         mainColor: "#9B51AC",
-        darkAccent: "#4F4350",
+        darkAccent: "#303030",
         lightAccent: "#B5A7B6",
     },
     "naranja": {
         mainColor: "#FF8E00",
-        darkAccent: "#524439",
-        lightAccent: "#BAA89B",
+        darkAccent: "#303030",
+        lightAccent: "#DFE0DF",
     },
     "verde": {
         mainColor: "#00FF4C",
-        darkAccent: "#3E4A3D",
+        darkAccent: "#303030",
         lightAccent: "#A1AF9F",
     },
     "rojo": {
-        mainColor: "#FF0000",
-        darkAccent: "#56423D",
+        mainColor: "#E70000",
+        darkAccent: "#303030",
         lightAccent: "#BEA6A0",
     },
     "negro": {
@@ -29,13 +29,13 @@ const colors = {
     },
     "amarillo": {
         mainColor: "#EEFF2A",
-        darkAccent: "#484838",
-        lightAccent: "#ADAC9A",
+        darkAccent: "#303030",
+        lightAccent: "#FAFAF0",
     },
 
     "azul": {
         mainColor: "#0B8DF2",
-        darkAccent: "#404756",
+        darkAccent: "#303030",
         lightAccent: "#A4ABBD",
     },
 };
