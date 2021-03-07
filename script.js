@@ -255,7 +255,7 @@ function showNASAPictureDay() {
                 `
                 <br>
                 <h2>Eres tan viej@ que la NASA ni tiene fotos para el dia de tu nacimiento</h2>
-                <img src="./img/hide_the_pain.png" alt="Close up of old men" style="max-width: 100%">
+                <img src="./img/hide_the_pain.png" alt="Close up of old men" style="max-width: 100%; border-radius: 5px">
                 `
             }
         })
