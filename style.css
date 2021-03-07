@@ -1,12 +1,13 @@
 * {
     outline: 2px solid red;
+    box-sizing: border-box;
 }
 
 
 body {
     margin: 0;
     max-width: 100%;
-    min-height: 99vh;
+    min-height: 100vh;
     position: relative;
 
 
@@ -40,6 +41,7 @@ main {
 
 #header-text {
     visibility: hidden;
+    max-width: 90vw;
     margin: 0.5rem auto;
 
     display: flex;
@@ -61,12 +63,16 @@ main {
 }
 
 #div-intro {
+    margin: 0 auto;
     margin-bottom: 2rem;
+    width: 95%;
     
 }
 
 #show-content {
     display: none;
+    margin: 0 auto;
+    width: 95%;
 }
 
 footer {
@@ -177,7 +183,7 @@ footer, h1 {
 }
 
 h1 {
-    font-size: 3rem;
+    font-size: 2rem;
 }
 
 footer {
