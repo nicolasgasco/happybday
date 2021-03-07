@@ -1,5 +1,5 @@
-const userNames = ["nerea", "ainhoa", "dom", "karmen", "itxaso", "nicolas", "mikel",
-                    "aitor"].sort();
+const userNames = ["deba", "allende", "adrian", "greta", "andrea", "haizea", "leire", "maialen", "klara", "ainhoa", "dom", "karmen", "itxaso", "nicolas", "mikel",
+                    "aitor", "itziar", "jone", "amaia", "colette", "bego"].sort();
 
 const colors = {
     "rosa": {
@@ -32,6 +32,12 @@ const colors = {
         darkAccent: "#484838",
         lightAccent: "#ADAC9A",
     },
+
+    "azul": {
+        mainColor: "#0B8DF2",
+        darkAccent: "#404756",
+        lightAccent: "#A4ABBD",
+    },
 };
 
 
@@ -52,7 +58,9 @@ function celebrateUser() {
         chosenUser = selectUserForm.value;
 
         textInHeader.innerText = `Zorionak ${chosenUser.charAt(0).toUpperCase() + chosenUser.substring(1)}!!!`
-        document.querySelector("#header-text").style.display = "flex";
+        document.querySelector("#header-text").style.visibility = "visible";
+        document.querySelector("#main-header").style.display = "block";
+        document.querySelector("#color-theme-choice").style.display = "block";
 
         document.querySelector("#div-intro").innerHTML = ``;
     
@@ -62,6 +70,7 @@ function celebrateUser() {
             `<img id="confetti" src="./img/confetti.gif" style="position:fixed; top:0px; left:0px; bottom:0px; right:0px; width:100%; height:100%; object-fit: fill; border:none; margin:0; padding:0; overflow:hidden; z-index:999999;">
             <img src="./img/happybd.gif" style="position:fixed; top:10%; left:35%; border:none; margin:0; padding:0; overflow:hidden; z-index:999;">
             `
+        
         
         setTimeout( function () {
             document.querySelector("#show-content").innerHTML = ``;
@@ -80,8 +89,8 @@ function showPresents() {
     introDiv.innerHTML =
     `
     <p>Quieres recibir tus regalos?</p>
-    <button id="yes-present">Si</p>
-    <button id="no-present">No</p>
+    <button id="yes-present">Si</button>
+    <button id="no-present">No</button>
     `
 
     document.querySelector("#no-present").onclick = (function () {
@@ -97,10 +106,9 @@ function receiveRandomInsult() {
     introDiv.innerHTML =
     `
     <p>Quieres recibir un insulto en ingles?</p>
-    <button id="yes-insult">Si</p>
-    <button id="no-insult">No</p>
-    <br>
-    <button id="following-present">Siguiente regalo</p>
+    <button id="yes-insult">Si</button>
+    <button id="no-insult">No</button>
+    <button id="next-present">Siguiente regalo</button>
     `
     document.querySelector("#no-insult").onclick = (function () {
         document.querySelector("#show-content").style.display = "none";
@@ -108,7 +116,7 @@ function receiveRandomInsult() {
             window.alert("Eres una persona horrible :(");
         }), 100);
     })
-    document.querySelector("#following-present").onclick = whatRMCharacterAreYou;
+    document.querySelector("#next-present").onclick = whatRMCharacterAreYou;
 
     document.querySelector("#yes-insult").onclick = (function () {
         fetch("https://www.foaas.com/operations").then( function(response) {
@@ -151,10 +159,9 @@ function whatRMCharacterAreYou() {
     introDiv.innerHTML =
         `
         <p>Quieres saber que personaje de Rick and Morty serias?</p>
-        <button id="yes-rm">Si</p>
-        <button id="no-rm">No</p>
-        <br>
-        <button id="following-present">Siguiente regalo</p>
+        <button id="yes-rm">Si</button>
+        <button id="no-rm">No</button>
+        <button id="next-present">Siguiente regalo</button>
         `
     document.querySelector("#no-rm").onclick = (function () {
         document.querySelector("#show-content").style.display = "none";
@@ -179,7 +186,7 @@ function whatRMCharacterAreYou() {
                 document.querySelector("#show-content").innerHTML =
                 `
                 <h2>${data.name}</h2>
-                <img src=${data.image} alt="Picture of ${data.name}" style="width:95%">
+                <img src=${data.image} alt="Picture of ${data.name}" style="width:70%; border-radius:5px">
                 `
 
                 document.querySelector("#show-content").style.display = "block";
@@ -188,7 +195,7 @@ function whatRMCharacterAreYou() {
 
     })
 
-    document.querySelector("#following-present").onclick = showNASAPictureDay;
+    document.querySelector("#next-present").onclick = showNASAPictureDay;
     
 }
 
@@ -198,10 +205,9 @@ function showNASAPictureDay() {
     introDiv.innerHTML =
         `
         <p>Quieres saber cual fue la foto del dia de NASA el dia que naciste?</p>
-        <button id="yes-nasa">Si</p>
-        <button id="no-nasa">No</p>
-        <br>
-        <button id="following-present">Siguiente regalo?</p>
+        <button id="yes-nasa">Si</button>
+        <button id="no-nasa">No</button>
+        <button id="next-present">Siguiente regalo?</button>
         `
 
     document.querySelector("#no-nasa").onclick = (function () {
@@ -243,7 +249,7 @@ function showNASAPictureDay() {
                         <br>
                         <p>${data.date.slice(-2)}/${data.date.slice(-5,-3)}/${data.date.slice(0,4)}</p>
                         <h2>${data.title}</h2>
-                        <img src="${data.url}" alt="Picture of ${data.title}" style="max-width: 100%">
+                        <img src="${data.url}" alt="Picture of ${data.title}" style="width: 100%; border-radius:5px">
                         `
             })
     
@@ -257,7 +263,7 @@ function showNASAPictureDay() {
             }
         })
 
-        document.querySelector("#following-present").onclick = endOfPresents;
+        document.querySelector("#next-present").onclick = endOfPresents;
     })
 
 function endOfPresents() {
@@ -277,11 +283,12 @@ function capitalizeName(name) {
 
 
 function changeColorTheme() {
-    const darkAccentElems = document.querySelectorAll("#div-intro, #show-content");
-    const lightAccentElems = document.querySelectorAll("body, #select-user, #select-color");
-    const mainColorElems = document.querySelectorAll("#main-header");
+    const darkAccentElems = document.querySelectorAll("#div-intro, #show-content, button");
+    const lightAccentElems = document.querySelectorAll("#select-user, input, #select-color option");
+    const mainColorElems = document.querySelectorAll("#main-header, #select-color, footer");
+    const mainColorOutline = document.querySelectorAll("button:hover");
 
-    const whiteText = document.querySelectorAll("#happybd-h1, #color-theme-choice");
+    const whiteText = document.querySelectorAll("h1, #color-theme-choice, footer p");
 
 
     const selectColorForm = document.querySelector("#select-color");
@@ -289,6 +296,7 @@ function changeColorTheme() {
     selectColorForm.onchange = function () {
             for ( let element of darkAccentElems ) {
                 element.style.backgroundColor = colors[selectColorForm.value.toLowerCase()].darkAccent;
+                console.log(colors[selectColorForm.value.toLowerCase()].darkAccent)
             }
 
             for ( let element of lightAccentElems ) {
@@ -299,10 +307,17 @@ function changeColorTheme() {
                 element.style.backgroundColor = colors[selectColorForm.value.toLowerCase()].mainColor;
             }
 
+            // Colored border must be added extra
+            for ( let element of mainColorOutline ) {
+                element.style.borderBottom = `4px solid ${colors[selectColorForm.value.toLowerCase()].mainColor}`;
+            }
+
+
             // For black background, white text is needed
             if ( selectColorForm.value.toLowerCase() === "negro" ) {
                 for ( let element of whiteText ) {
-                    element.style.color = colors[selectColorForm.value.toLowerCase()].lightAccent;
+                    element.style.color = "white";
+                    // colors[selectColorForm.value.toLowerCase()].lightAccent;
                 }
             } else {
                 for ( let element of whiteText ) {
